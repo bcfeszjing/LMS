@@ -1,9 +1,13 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class User {
     private String name;
     private int age;
     ArrayList<String> borrowedBooks;
+    private Map<String, LocalDate> borrowedBooksDueDates;
 
     public User(String name, int age) {
         this.name = name;
@@ -29,6 +33,9 @@ public class User {
 
     public void borrowBook(String bookTitle) {
         borrowedBooks.add(bookTitle);
+        LocalDate dueDate = LocalDate.now().plusDays(14);
+        borrowedBooksDueDates.put(bookTitle, dueDate);
+        System.out.println("Book: " + bookTitle + ", Due Date: " + dueDate.format(DateTimeFormatter.ofPattern("MMM dd, yyyy")));
     }
 
     public void returnBook(String bookTitle) {
@@ -50,5 +57,19 @@ public class User {
             }
         }
     }
-    
+
+    public void checkOverdueBooks() {
+        LocalDate today = LocalDate.now();
+        boolean overdue = false;
+        for (Map.Entry<String, LocalDate> entry : borrowedBooksDueDates.entrySet()) {
+            if (entry.getValue().isBefore(today)) {
+                overdue = true;
+                long daysOverdue = today.toEpochDay() - entry.getValue().toEpochDay();
+                System.out.println("Book: " + entry.getKey() + " is overdue by " + daysOverdue + "days.");
+            }
+        }
+        if (!overdue) {
+            System.out.println("No overdue books.");
+        }
+    }
 }
