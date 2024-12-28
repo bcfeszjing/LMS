@@ -1,13 +1,12 @@
-package Library;
-
 import Book.Book;
 import User.User; 
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class Library {
-    private ArrayList<Book> books；
+    private ArrayList<Book> books;
     private ArrayList<User> users;
 
     public Library() {
