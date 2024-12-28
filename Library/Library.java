@@ -1,9 +1,7 @@
 package Library;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 import Book.Book;
 import User.User;
+import java.util.ArrayList;
 
 public class Library {
     private ArrayList<Book> books;
@@ -12,6 +10,12 @@ public class Library {
     public Library() {
         books = new ArrayList<>();
         users = new ArrayList<>();
+    }
+
+    // Method to add a book to the library
+    public void addBook(Book book) {
+        books.add(book);
+        System.out.println("Book added: " + book.getTitle());
     }
 
     // Method to add a user to the library system
@@ -37,36 +41,6 @@ public class Library {
         }
     }
 
-    // Modify the borrowBook method using a lambda expression to filter available books
-    public void borrowBook(User user, String title) {
-        List<Book> availableBooks = books.stream()
-            .filter(book -> book.getTitle().equalsIgnoreCase(title) && book.isAvailable())
-            .collect(Collectors.toList());
-
-        if (!availableBooks.isEmpty()) {
-            Book bookToBorrow = availableBooks.get(0);  // Get the first available book
-            bookToBorrow.setAvailable(false);
-            user.borrowBook(bookToBorrow.getTitle());
-            System.out.println("The book '" + title + "' has been borrowed by " + user.getName());
-        } else {
-            System.out.println("The book '" + title + "' is either unavailable or not found.");
-        }
-    }
-
-    // Display all books with their availability status
-    public void displayBooks() {
-        System.out.println("Books in the library:");
-        for (Book book : books) {
-            System.out.println(book.getTitle() + " (" + (book.isAvailable() ? "Available" : "Borrowed") + ")");
-        }
-    }
-
-    // Method to add a book to the library
-    public void addBook(Book book) {
-        books.add(book);
-        System.out.println("Book added: " + book.getTitle());
-    }
-
     // Method to search for books by title
     public void searchByTitle(String title) {
         System.out.println("Searching for books with title containing: " + title);
@@ -79,6 +53,26 @@ public class Library {
         }
         if (!found) {
             System.out.println("No books found with title containing: " + title);
+        }
+    }
+
+    // Modify the borrowBook method using a lambda expression to filter available books
+    public void borrowBook(User user, String title) {
+        for (Book book : books) {
+            if (book.getTitle().equalsIgnoreCase(title) && book.isAvailable()) {
+                book.setAvailable(false);
+                user.borrowBook(title);
+                return;
+            }
+        }
+        System.out.println("The book '" + title + "' is either unavailable or not found.");
+    }
+
+    // Display all books with their availability status
+    public void displayBooks() {
+        System.out.println("Books in the library:");
+        for (Book book : books) {
+            System.out.println(book.getTitle() + " (" + (book.isAvailable() ? "Available" : "Borrowed") + ")");
         }
     }
 }

@@ -2,6 +2,7 @@ package User;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 public class User {
@@ -14,6 +15,7 @@ public class User {
         this.name = name;
         this.age = age;
         this.borrowedBooks = new ArrayList<>();
+        this.borrowedBooksDueDates = new HashMap<>();
     }
 
     public String getName() {
