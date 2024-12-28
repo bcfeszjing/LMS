@@ -1,9 +1,9 @@
-import Book.Book;
-import User.User; 
-
+package Library;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import Book.Book;
+import User.User;
 
 public class Library {
     private ArrayList<Book> books;
