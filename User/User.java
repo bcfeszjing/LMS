@@ -58,6 +58,18 @@ public class User {
         }
     }
 
+    public void checkDueDates() {
+        if (borrowedBooksDueDates.isEmpty()) {
+            System.out.println("No books borrowed.");
+        } else {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd, yyyy");
+            System.out.println("Borrowed Books Due Dates:");
+            for (Map.Entry<String, LocalDate> entry : borrowedBooksDueDates.entrySet()) {
+                System.out.println("Book: " + entry.getKey() + ", Due Date: " + entry.getValue().format(formatter));
+            }
+        }
+    }
+
     public void checkOverdueBooks() {
         LocalDate today = LocalDate.now();
         boolean overdue = false;
