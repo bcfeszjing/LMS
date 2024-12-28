@@ -1,5 +1,4 @@
 Luck Phang (LP)
-Nur Faqiha (NF)
 Wen Zhe (WZ)
 Pei Yong (PY)
 
