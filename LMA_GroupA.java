@@ -21,6 +21,8 @@ public class LMA_GroupA {
         // Borrowing books
         library.borrowBook(user1, "Harry Potter");
         library.borrowBook(user2, "The Hobbit");
+        library.borrowBook(user1, "Lord of the Rings");
+        user1.returnBook("Lord of the Rings");
 
         // Displaying information
         library.listAvailableBooks();
